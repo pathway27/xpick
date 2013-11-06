@@ -3,9 +3,8 @@
 bin/
 lib/
 include/
+html/
 .Python
-
-
 
 resources/
 xfire_games.ini
