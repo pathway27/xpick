@@ -6,6 +6,4 @@ include/
 html/
 .Python
 
-resources/
 xfire_games.ini
-
