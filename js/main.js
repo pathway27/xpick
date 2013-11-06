@@ -15,17 +15,22 @@ $('#query').on("keypress", function(t) {
         var YQL_QUERY = encodeURI(YQL_API) + encodeURIComponent('use ' + YQL_CSS +
                                            'select * from data.html.cssselect where url="' +
                                            XFIRE_ROOT + username + '"' +
-                                           'and css="#template_container .games"')
+                                           'and css="#template_container table"') + 
+                                           encodeURI('&format=xml&callback=')
 
-        var stuff = $.get( YQL_QUERY, cbFunc , "xml");
+        // GET THE TYPE U WILL USE AS
+        var stuff = $.get( YQL_QUERY, cbFunc , "html");
         console.log(YQL_QUERY);
         function cbFunc(data) {
             console.log(data);
-            var $results = $(data).find('.list');
-            $("table").before('<div id="main-content"></div>');
-            $('#main-content').html($results);
+            info = $(data).find('table');
+            console.log(info);
+
+            $('#results').html(info);
             clean_table();
-            console.log($results);
+            //var obj = jQuery.parseJSON(data);
+            //console.log(data.query.results.results.table);
+
             $("div.progress").toggleClass("hidden active");
         }
 
@@ -42,17 +47,20 @@ $('#query').on("keypress", function(t) {
 
 
 function clean_table() {
+    $('table').toggleClass("games table")
+    $('tr').unwrap()
+    $('tr:first').wrap("<thead></thead>");
+    $('tr:gt(0)').wrapAll('<tbody class="list"></tbody>');
 
-    table = $('table:first');
-    table.css("min-width", "100%");
-    table.css("min-height", "100%");
+    // Get rid of paragraphs
+    $('table p').contents().unwrap();
+
+    //$('tr:first th').each(function (index) {
+    //    $(this).toggleClass($(this).text());
+    //});
+
+    //$('tr:first').unwrap();
+    //table = $('tr').wrapAll('<table class="table"></table>');
 
 
-    table.unwrap();
-    table.unwrap();
-
-    table.toggleClass("games table");
-
-    //tableHead = $('table:first tr:first').wrap("<thead></thead>");
-    //body = $('table:first tr:gt(0)').wrapAll("<tbody></tbody>")
 }
