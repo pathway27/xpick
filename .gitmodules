@@ -1,0 +1,3 @@
+[submodule "wiki"]
+	path = wiki
+	url = https://sreechela@bitbucket.org/sreechela/xpick.git/wiki

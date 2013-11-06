@@ -1,5 +1,12 @@
 .DS_Store
 
+bin/
+lib/
+include/
+.Python
+
+
+
 resources/
 xfire_games.ini
 
