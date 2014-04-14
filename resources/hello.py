@@ -1,12 +1,15 @@
-#!/usr/bin/env python
+#!c:\Python34\python.exe
 import os
+import sys
+print(sys.version)
 import wx
 
 
 class MyWindow(wx.Frame):
     """ Deriving a new Frame. """
     def __init__(self, parent, title):
-        wx.Frame.__init__(self, parent, title=title, size=(200, 100))
+        wx.Frame.__init__(self, parent, title=title, size=(500, 500), style=wx.SIMPLE_BORDER )
+        self.Centre()
         self.control = wx.TextCtrl(self, style=wx.TE_MULTILINE)
         self.CreateStatusBar()
 
