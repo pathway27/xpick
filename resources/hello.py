@@ -20,10 +20,10 @@ feet = StringVar()
 meters = StringVar()
 
 feet_entry = Entry(mainframe, width=7, textvariable=feet)
-feet_entry.grid(column=2, row=1, sticky=(W, E))
+feet_entry.grid(column=2, row=1, sticky=(S))
 
 Label(mainframe, textvariable=meters).grid(column=2, row=2, sticky=(W, E))
-Button(mainframe, text="Calculate", command=calculate).grid(column=3, row=3, sticky=W)
+Button(mainframe, text="Calculate", command=calculate).grid(column=3, row=3, sticky=(N, W, E, S))
 
 Label(mainframe, text="feet").grid(column=3, row=1, sticky=W)
 Label(mainframe, text="is equivalent to").grid(column=1, row=2, sticky=E)
