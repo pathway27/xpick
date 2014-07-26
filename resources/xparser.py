@@ -1,10 +1,5 @@
 import sys
-print(sys.version)
 import configparser
-
-class XFireConfigParser(configparser.ConfigParser):
-	def __init__(self):
-		configparser.ConfigParser().__init__(self)
 
 # http://stackoverflow.com/questions/13921323/handling-duplicate-keys-with-configparser
 class ConfigParserMultiOpt(configparser.RawConfigParser):
@@ -12,6 +7,15 @@ class ConfigParserMultiOpt(configparser.RawConfigParser):
 
   def __init__(self):
     configparser.RawConfigParser.__init__(self, empty_lines_in_values=False, strict=False)
+
+  def get_names(self):
+    return [str(self.get(x, 'LongName')) for x in self.sections() if self.has_option(x, 'LongName')]
+
+  def get_game(self, name):
+    for x in self.sections():
+      if self.has_option(x, 'LongName'):
+        if self.get(x, 'LongName') == name:
+          return self.items(x)
 
   def _read(self, fp, fpname):
     """Parse a sectioned configuration file.
@@ -134,14 +138,17 @@ class ConfigParserMultiOpt(configparser.RawConfigParser):
     self._join_multiline_values()
 
 
+if __name__ == '__main__':
+    xfile = "xfire_games.ini"
+    config = ConfigParserMultiOpt()
 
-xfile = "xfire_games.ini"
-config = ConfigParserMultiOpt()
+    # try:
+    config.read(xfile, encoding='utf-8-sig')
+    # except configparser.DuplicateOptionError:
+    # 	print("SD")
 
-# try:
-config.read(xfile, encoding='utf-8-sig')
-# except configparser.DuplicateOptionError:
-# 	print("SD")
+    #x = [config.get(x, 'LongName') for x in config.sections() if config.has_option(x, 'LongName')]
+    #print(len(config.get_names()))
+    print(config.get_game('Command & Conquer: Renegade'))
 
-print(config.get('2', 'InGameRenderer'))
 

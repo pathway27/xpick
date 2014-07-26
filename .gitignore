@@ -7,3 +7,4 @@ html/
 .Python
 
 xfire_games.ini
+resources/__pycache__/
