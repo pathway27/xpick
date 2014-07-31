@@ -8,3 +8,5 @@ html/
 
 xfire_games.ini
 resources/__pycache__/
+
+.idea
